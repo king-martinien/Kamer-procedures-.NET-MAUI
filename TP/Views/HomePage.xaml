@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:TP.ViewModels"
+             xmlns:models="clr-namespace:TP.Models"
+             x:Class="TP.Views.HomePage"
+             x:DataType="viewmodels:HomeViewModel"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#FAFAFA">
+    
+    <Grid RowDefinitions="Auto,*,Auto"
+          BackgroundColor="#FAFAFA">
+        <!-- Header -->
+        <Grid Grid.Row="0" 
+              BackgroundColor="#1A5D4A"
+              Padding="20,60,20,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            
+            <VerticalStackLayout Grid.Column="0" Spacing="5">
+                <Label Text="Procédures Administratives"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="White" />
+                <Label Text="République du Cameroun"
+                       FontSize="14"
+                       TextColor="White"
+                       Opacity="0.9" />
+            </VerticalStackLayout>
+            
+            <Label Grid.Column="1"
+                   Text="🇨🇲"
+                   FontSize="40"
+                   VerticalOptions="Center" />
+        </Grid>
+
+        <!-- Main Content -->
+        <ScrollView Grid.Row="1"
+                    BackgroundColor="#FAFAFA">
+            <VerticalStackLayout Spacing="20" Padding="20,20,20,20"
+                               BackgroundColor="#FAFAFA">
+                <!-- Statistics Cards -->
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                    <Border Grid.Column="0"
+                            BackgroundColor="#1A5D4A"
+                            StrokeThickness="0"
+                            Padding="15"
+                            StrokeShape="RoundRectangle 10">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="{Binding Statistics.ProcedureCount}"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="Center" />
+                            <Label Text="Procédures"
+                                   FontSize="12"
+                                   TextColor="White"
+                                   Opacity="0.9"
+                                   HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </Border>
+                    
+                    <Border Grid.Column="1"
+                            BackgroundColor="#1A5D4A"
+                            StrokeThickness="0"
+                            Padding="15"
+                            StrokeShape="RoundRectangle 10">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="{Binding Statistics.OfficeCount}"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="Center" />
+                            <Label Text="Bureaux"
+                                   FontSize="12"
+                                   TextColor="White"
+                                   Opacity="0.9"
+                                   HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </Border>
+                    
+                    <Border Grid.Column="2"
+                            BackgroundColor="#1A5D4A"
+                            StrokeThickness="0"
+                            Padding="15"
+                            StrokeShape="RoundRectangle 10">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="{Binding Statistics.Assistance}"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="Center" />
+                            <Label Text="Assistance"
+                                   FontSize="12"
+                                   TextColor="White"
+                                   Opacity="0.9"
+                                   HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <!-- Popular Procedures -->
+                <VerticalStackLayout Spacing="10">
+                    <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,10">
+                        <Label Grid.Column="0"
+                               Text="Procédures populaires"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="Black" />
+                        <Label Grid.Column="1"
+                               Text="Voir tout"
+                               FontSize="14"
+                               TextColor="#1A5D4A"
+                               VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnSeeAllTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                    
+                    <CarouselView ItemsSource="{Binding PopularProcedures}"
+                                  HeightRequest="140"
+                                  IndicatorView="PopularProceduresIndicator"
+                                  Loop="False">
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Procedure">
+                                <Border BackgroundColor="White"
+                                        StrokeThickness="1"
+                                        Stroke="#E0E0E0"
+                                        Padding="15"
+                                        Margin="0,0,10,0"
+                                        StrokeShape="RoundRectangle 10">
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=NavigateToProcedureCommand}"
+                                                             CommandParameter="{Binding .}" />
+                                    </Border.GestureRecognizers>
+                                    
+                                    <Grid ColumnDefinitions="Auto,*,Auto">
+                                        <Label Grid.Column="0"
+                                               Text="{Binding Icon}"
+                                               FontSize="40"
+                                               VerticalOptions="Center"
+                                               Margin="0,0,15,0" />
+                                        
+                                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                                            <Label Text="{Binding Title}"
+                                                   FontSize="16"
+                                                   FontAttributes="Bold"
+                                                   TextColor="Black" />
+                                            <Label Text="{Binding Description}"
+                                                   FontSize="14"
+                                                   TextColor="#666666"
+                                                   LineBreakMode="TailTruncation" />
+                                        </VerticalStackLayout>
+                                        
+                                        <VerticalStackLayout Grid.Column="2"
+                                                             HorizontalOptions="End"
+                                                             Spacing="5">
+                                            <Label Text="{Binding Duration}"
+                                                   FontSize="12"
+                                                   TextColor="#1A5D4A"
+                                                   HorizontalOptions="End" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                    
+                    <IndicatorView x:Name="PopularProceduresIndicator"
+                                   IndicatorColor="#E0E0E0"
+                                   SelectedIndicatorColor="#1A5D4A"
+                                   IndicatorSize="8"
+                                   MaximumVisible="5"
+                                   HorizontalOptions="Center"
+                                   Margin="0,5,0,0" />
+                </VerticalStackLayout>
+
+                <!-- Categories -->
+                <Label Text="Catégories"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                       Margin="0,10,0,10" />
+                
+                <CollectionView ItemsSource="{Binding Categories}"
+                                SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                         Span="3"
+                                         HorizontalItemSpacing="10"
+                                         VerticalItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Category">
+                            <Border BackgroundColor="White"
+                                    StrokeThickness="1"
+                                    Stroke="#E0E0E0"
+                                    Padding="15"
+                                    StrokeShape="RoundRectangle 10">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=NavigateToCategoryCommand}"
+                                                         CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
+                                
+                                <VerticalStackLayout Spacing="8"
+                                                   HorizontalOptions="Center">
+                                    <Label Text="{Binding Icon}"
+                                           FontSize="30"
+                                           HorizontalOptions="Center" />
+                                    <Label Text="{Binding Name}"
+                                           FontSize="12"
+                                           FontAttributes="Bold"
+                                           TextColor="Black"
+                                           HorizontalOptions="Center"
+                                           HorizontalTextAlignment="Center" />
+                                    <Label Text="{Binding ProcedureCount, StringFormat='{0} procédures'}"
+                                           FontSize="10"
+                                           TextColor="#666666"
+                                           HorizontalOptions="Center"
+                                           HorizontalTextAlignment="Center" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Find Office Card -->
+                <Border BackgroundColor="#1A5D4A"
+                        StrokeThickness="0"
+                        Padding="20"
+                        Margin="0,20,0,0"
+                        StrokeShape="RoundRectangle 10">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToOfficesCommand}" />
+                    </Border.GestureRecognizers>
+                    
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Label Grid.Column="0"
+                               Text="📍"
+                               FontSize="40"
+                               VerticalOptions="Center"
+                               Margin="0,0,15,0" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                            <Label Text="Trouver un bureau"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="White" />
+                            <Label Text="Localisez les bureaux administratifs près de chez vous"
+                                   FontSize="12"
+                                   TextColor="White"
+                                   Opacity="0.9"
+                                   LineBreakMode="WordWrap" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Bottom Navigation -->
+        <Grid Grid.Row="2"
+              BackgroundColor="White"
+              Padding="0,10,0,10"
+              RowDefinitions="Auto"
+              ColumnDefinitions="*,*,*,*">
+            <Border Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    Padding="10">
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Label Text="🏠"
+                           FontSize="24"
+                           HorizontalOptions="Center" />
+                    <Label Text="Accueil"
+                           FontSize="10"
+                           TextColor="#1A5D4A"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+            
+            <Border Grid.Column="1"
+                    BackgroundColor="Transparent"
+                    Padding="10">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnExploreTapped" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Label Text="🔍"
+                           FontSize="24"
+                           HorizontalOptions="Center" />
+                    <Label Text="Explorer"
+                           FontSize="10"
+                           TextColor="#666666"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+            
+            <Border Grid.Column="2"
+                    BackgroundColor="Transparent"
+                    Padding="10">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnOfficesTapped" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Label Text="📍"
+                           FontSize="24"
+                           HorizontalOptions="Center" />
+                    <Label Text="Bureaux"
+                           FontSize="10"
+                           TextColor="#666666"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+            
+            <Border Grid.Column="3"
+                    BackgroundColor="Transparent"
+                    Padding="10">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnAboutTapped" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Label Text="ℹ️"
+                           FontSize="24"
+                           HorizontalOptions="Center" />
+                    <Label Text="A Propos"
+                           FontSize="10"
+                           TextColor="#666666"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+    </Grid>
+</ContentPage>

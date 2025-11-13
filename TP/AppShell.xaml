@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="TP.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:TP.Views"
+    Title="Procedures Administratives">
+
+    <ShellContent
+        Title="Splash"
+        ContentTemplate="{DataTemplate views:SplashPage}"
+        Route="SplashPage" />
+
+    <ShellContent
+        Title="Onboarding"
+        ContentTemplate="{DataTemplate views:OnboardingPage}"
+        Route="OnboardingPage" />
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate views:HomePage}"
+        Route="HomePage" />
+
+    <ShellContent
+        Title="ProcedureDetail"
+        ContentTemplate="{DataTemplate views:ProcedureDetailPage}"
+        Route="ProcedureDetailPage" />
+
+    <ShellContent
+        Title="Category"
+        ContentTemplate="{DataTemplate views:CategoryPage}"
+        Route="CategoryPage" />
+
+    <ShellContent
+        Title="About"
+        ContentTemplate="{DataTemplate views:AboutPage}"
+        Route="AboutPage" />
+
+    <ShellContent
+        Title="Offices"
+        ContentTemplate="{DataTemplate views:OfficesPage}"
+        Route="OfficesPage" />
+
+    <ShellContent
+        Title="Explore"
+        ContentTemplate="{DataTemplate views:ExplorePage}"
+        Route="ExplorePage" />
+
+</Shell>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:TP.ViewModels"
+             xmlns:models="clr-namespace:TP.Models"
+             x:Class="TP.Views.OnboardingPage"
+             x:DataType="viewmodels:OnboardingViewModel"
+             Shell.NavBarIsVisible="False">
+    
+    <Grid>
+        <CarouselView x:Name="OnboardingCarousel"
+                      ItemsSource="{Binding OnboardingItems}"
+                      CurrentItem="{Binding CurrentItem}"
+                      CurrentItemChanged="OnCurrentItemChanged"
+                      IndicatorView="OnboardingIndicator"
+                      Loop="False">
+            <CarouselView.ItemTemplate>
+                <DataTemplate x:DataType="models:OnboardingItem">
+                    <Grid BackgroundColor="{Binding BackgroundColor}">
+                        <!-- Background Icons (faint) -->
+                        <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*,*" Opacity="0.1">
+                            <Label Grid.Row="0" Grid.Column="0"
+                                   Text="📄"
+                                   FontSize="80"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Row="0" Grid.Column="2"
+                                   Text="🔍"
+                                   FontSize="80"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Row="2" Grid.Column="1"
+                                   Text="📍"
+                                   FontSize="80"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center" />
+                        </Grid>
+                        
+                        <!-- Main Content -->
+                        <VerticalStackLayout Padding="40,60,40,40"
+                                           Spacing="30"
+                                           VerticalOptions="Center">
+                            <!-- Icon Circle -->
+                            <Border WidthRequest="120"
+                                    HeightRequest="120"
+                                    StrokeThickness="0"
+                                    BackgroundColor="White"
+                                    HorizontalOptions="Center"
+                                    StrokeShape="RoundRectangle 60">
+                                <Label Text="{Binding Icon}"
+                                       FontSize="60"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center" />
+                            </Border>
+                            
+                            <!-- Title -->
+                            <Label Text="{Binding Title}"
+                                   FontSize="32"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="Center"
+                                   HorizontalTextAlignment="Center"
+                                   LineBreakMode="WordWrap" />
+                            
+                            <!-- Subtitle -->
+                            <Label Text="{Binding Subtitle}"
+                                   FontSize="20"
+                                   TextColor="White"
+                                   HorizontalOptions="Center"
+                                   HorizontalTextAlignment="Center"
+                                   LineBreakMode="WordWrap"
+                                   Opacity="0.9" />
+                            
+                            <!-- Description (if exists) -->
+                            <Label Text="{Binding Description}"
+                                   FontSize="16"
+                                   TextColor="White"
+                                   HorizontalOptions="Center"
+                                   HorizontalTextAlignment="Center"
+                                   LineBreakMode="WordWrap"
+                                   Opacity="0.8" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+        
+        <!-- Bottom Section with Indicators and Button -->
+        <Grid RowDefinitions="*,Auto,Auto"
+              Padding="40,0,40,40">
+            <IndicatorView x:Name="OnboardingIndicator"
+                           Grid.Row="1"
+                           IndicatorColor="White"
+                           SelectedIndicatorColor="White"
+                           IndicatorSize="8"
+                           MaximumVisible="3"
+                           HorizontalOptions="Center"
+                           Margin="0,0,0,20" />
+            
+            <Button Grid.Row="2"
+                    x:Name="NextButton"
+                    Command="{Binding NextCommand}"
+                    TextColor="White"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    HorizontalOptions="Fill" />
+        </Grid>
+    </Grid>
+</ContentPage>
+

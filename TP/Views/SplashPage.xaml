@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:TP.ViewModels"
+             x:Class="TP.Views.SplashPage"
+             x:DataType="viewmodels:SplashViewModel"
+             BackgroundColor="#1A5D4A"
+             Shell.NavBarIsVisible="False">
+    
+    <Grid>
+        <!-- Background Icons (faint) -->
+        <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*,*" Opacity="0.1">
+            <!-- Document Icon (Top Left) -->
+            <Label Grid.Row="0" Grid.Column="0"
+                   Text="📄"
+                   FontSize="80"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+            
+            <!-- Search Icon (Top Right) -->
+            <Label Grid.Row="0" Grid.Column="2"
+                   Text="🔍"
+                   FontSize="80"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+            
+            <!-- Location Icon (Bottom Center) -->
+            <Label Grid.Row="2" Grid.Column="1"
+                   Text="📍"
+                   FontSize="80"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+        </Grid>
+        
+        <!-- Loading Indicator -->
+        <ActivityIndicator IsRunning="True"
+                          Color="White"
+                          VerticalOptions="Center"
+                          HorizontalOptions="Center" />
+    </Grid>
+</ContentPage>
+

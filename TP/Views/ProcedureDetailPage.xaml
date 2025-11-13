@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:TP.ViewModels"
+             x:Class="TP.Views.ProcedureDetailPage"
+             x:DataType="viewmodels:ProcedureDetailViewModel"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#FAFAFA">
+    
+    <Grid RowDefinitions="Auto,*"
+          BackgroundColor="#FAFAFA">
+        <!-- Header -->
+        <Grid Grid.Row="0"
+              BackgroundColor="#FAFAFA"
+              Padding="20,60,20,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <Button Grid.Column="0"
+                    Text="←"
+                    FontSize="24"
+                    BackgroundColor="Transparent"
+                    TextColor="Black"
+                    Command="{Binding BackCommand}"
+                    WidthRequest="40"
+                    HeightRequest="40"
+                    Padding="0" />
+            
+            <Label Grid.Column="1"
+                   Text="{Binding Procedure.Title}"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   VerticalOptions="Center"
+                   Margin="10,0,0,0"
+                   LineBreakMode="TailTruncation" />
+        </Grid>
+
+        <!-- Content -->
+        <ScrollView Grid.Row="1"
+                    BackgroundColor="#FAFAFA">
+            <VerticalStackLayout Spacing="20" Padding="20"
+                               BackgroundColor="#FAFAFA">
+                <!-- Title and Description -->
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="{Binding Procedure.Title}"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="Black" />
+                    <Label Text="{Binding Procedure.Description}"
+                           FontSize="16"
+                           TextColor="#666666"
+                           LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+
+                <!-- Tabs -->
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                    <Border x:Name="NewRequestTab"
+                            Grid.Column="0"
+                            BackgroundColor="#1A5D4A"
+                            StrokeThickness="0"
+                            Padding="15"
+                            StrokeShape="RoundRectangle 8">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectTabCommand}"
+                                                 CommandParameter="Nouvelle demande" />
+                        </Border.GestureRecognizers>
+                        <Label x:Name="NewRequestLabel"
+                               Text="Nouvelle demande"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="White"
+                               HorizontalOptions="Center" />
+                    </Border>
+                    
+                    <Border x:Name="RenewalTab"
+                            Grid.Column="1"
+                            BackgroundColor="#E0E0E0"
+                            StrokeThickness="0"
+                            Padding="15"
+                            StrokeShape="RoundRectangle 8">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectTabCommand}"
+                                                 CommandParameter="Renouvellement" />
+                        </Border.GestureRecognizers>
+                        <Label x:Name="RenewalLabel"
+                               Text="Renouvellement"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#666666"
+                               HorizontalOptions="Center" />
+                    </Border>
+                </Grid>
+
+                <!-- Key Information -->
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                    <Border Grid.Column="0"
+                            BackgroundColor="#F5F5F5"
+                            StrokeThickness="0"
+                            Padding="15"
+                            StrokeShape="RoundRectangle 8">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="⏰"
+                                   FontSize="24"
+                                   HorizontalOptions="Center" />
+                            <Label Text="Délai"
+                                   FontSize="12"
+                                   TextColor="#666666"
+                                   HorizontalOptions="Center" />
+                            <Label Text="{Binding Procedure.Duration}"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="Black"
+                                   HorizontalOptions="Center"
+                                   HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                    </Border>
+                    
+                    <Border Grid.Column="1"
+                            BackgroundColor="#F5F5F5"
+                            StrokeThickness="0"
+                            Padding="15"
+                            StrokeShape="RoundRectangle 8">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="💰"
+                                   FontSize="24"
+                                   HorizontalOptions="Center" />
+                            <Label Text="Coût"
+                                   FontSize="12"
+                                   TextColor="#666666"
+                                   HorizontalOptions="Center" />
+                            <Label Text="{Binding Procedure.Cost}"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="Black"
+                                   HorizontalOptions="Center"
+                                   HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                    </Border>
+                    
+                    <Border Grid.Column="2"
+                            BackgroundColor="#F5F5F5"
+                            StrokeThickness="0"
+                            Padding="15"
+                            StrokeShape="RoundRectangle 8">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="📊"
+                                   FontSize="24"
+                                   HorizontalOptions="Center" />
+                            <Label Text="Difficulté"
+                                   FontSize="12"
+                                   TextColor="#666666"
+                                   HorizontalOptions="Center" />
+                            <Label Text="{Binding Procedure.Difficulty}"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="Black"
+                                   HorizontalOptions="Center"
+                                   HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <!-- Progress Section -->
+                <Border BackgroundColor="White"
+                        StrokeThickness="1"
+                        Stroke="#E0E0E0"
+                        Padding="20"
+                        StrokeShape="RoundRectangle 10"
+                        Margin="0,0,0,20">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Progression"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="Black" />
+                        
+                        <ProgressBar Progress="{Binding ProgressPercentage}"
+                                     ProgressColor="#1A5D4A"
+                                     BackgroundColor="#E0E0E0"
+                                     HeightRequest="8" />
+                        
+                        <Label Text="{Binding ProgressText}"
+                               FontSize="14"
+                               TextColor="#666666"
+                               HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
+

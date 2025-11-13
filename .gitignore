@@ -1,0 +1,100 @@
+# --- Exclusions Standard de la solution et de l'IDE ---
+# Les dossiers des binaires, objets et intermédiaires de build
+[Bb]in/
+[Oo]bj/
+.vs/
+*.user
+*.suo
+*.sln.docstates
+
+# Fichiers de l'éditeur de code (Visual Studio, VS Code, JetBrains...)
+*.userprefs
+*.DS_Store
+*.orig
+
+# --- Exclusions Spécifiques à .NET MAUI ---
+
+# Dépendances (NuGet, etc.)
+packages/
+*.nupkg
+.nuget/
+.templateengine/
+
+# Fichiers générés lors de la restauration du package
+project.assets.json
+project.nuget.cache
+**/project.assets.json
+**/project.nuget.cache
+
+# Fichiers spécifiques aux plateformes (même si couverts par bin/ et obj/ globaux)
+# C'est une bonne pratique de les spécifier
+**/Platforms/**/bin/
+**/Platforms/**/obj/
+
+# Exclusions de tests et outils (si vous en ajoutez)
+TestResults/
+coverlet/
+
+# Fichiers du compilateur Roslyn (pour le cache)
+.roslyn/
+
+# --- Exclusions Spécifiques Android ---
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+*.jar
+*.keystore
+*.jks
+**/Android/**/bin/
+**/Android/**/obj/
+**/Android/**/Generated/
+
+# --- Exclusions Spécifiques iOS ---
+*.ipa
+*.dSYM.zip
+*.dSYM
+DerivedData/
+*.xcuserstate
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+**/iOS/**/bin/
+**/iOS/**/obj/
+**/iOS/**/Generated/
+
+# --- Exclusions Spécifiques Mac Catalyst ---
+**/MacCatalyst/**/bin/
+**/MacCatalyst/**/obj/
+**/MacCatalyst/**/Generated/
+
+# --- Exclusions Spécifiques Windows ---
+**/Windows/**/bin/
+**/Windows/**/obj/
+**/Windows/**/Generated/
+*.appx
+*.appxbundle
+*.cer
+*.pfx
+
+# --- Fichiers de logs et temporaires ---
+*.log
+*.tmp
+*.temp
+*.cache
+logs/
+*.swp
+*.swo
+*~
+
+# --- Secrets et clés API (à personnaliser selon vos besoins) ---
+appsettings.local.json
+secrets.json
+*.secrets
+**/secrets/
+
+# --- Fichiers de build MAUI ---
+**/Resources/raw/**
+!**/Resources/raw/.gitkeep
+*.maui
+*.maui.zip

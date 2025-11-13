@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:TP.ViewModels"
+             xmlns:models="clr-namespace:TP.Models"
+             x:Class="TP.Views.OfficesPage"
+             x:DataType="viewmodels:OfficesViewModel"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#FAFAFA">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="RegionFilterStyle" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="Stroke" Value="#E0E0E0" />
+                <Setter Property="Padding" Value="15,8" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 20" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
+        <!-- Header -->
+        <Grid Grid.Row="0"
+              BackgroundColor="#1A5D4A"
+              Padding="20,60,20,20">
+            <Label Text="Bureaux Administratifs"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+        </Grid>
+
+        <!-- Search Bar -->
+        <Border Grid.Row="1"
+                BackgroundColor="White"
+                StrokeThickness="1"
+                Stroke="#E0E0E0"
+                Padding="15,10"
+                Margin="20,15,20,10"
+                StrokeShape="RoundRectangle 25">
+            <Grid ColumnDefinitions="Auto,*">
+                <Label Grid.Column="0"
+                       Text="🔍"
+                       FontSize="20"
+                       VerticalOptions="Center"
+                       Margin="0,0,10,0" />
+                <Entry Grid.Column="1"
+                       Text="{Binding SearchText}"
+                       Placeholder="Rechercher un bureau..."
+                       BackgroundColor="Transparent"
+                       PlaceholderColor="#999999"
+                       TextColor="Black" />
+            </Grid>
+        </Border>
+
+        <!-- Region Filter -->
+        <ScrollView Grid.Row="2"
+                    Orientation="Horizontal"
+                    Margin="20,0,20,10">
+            <HorizontalStackLayout x:Name="RegionsStackLayout"
+                                 Spacing="10">
+                <!-- Les filtres seront ajoutés dynamiquement dans le code-behind -->
+            </HorizontalStackLayout>
+        </ScrollView>
+
+        <!-- Offices List -->
+        <CollectionView Grid.Row="3"
+                        ItemsSource="{Binding FilteredOffices}"
+                        SelectionMode="None"
+                        Margin="20,0,20,0"
+                        BackgroundColor="#FAFAFA">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Office">
+                    <Border BackgroundColor="White"
+                            StrokeThickness="1"
+                            Stroke="#E0E0E0"
+                            Padding="20"
+                            Margin="0,0,0,15"
+                            StrokeShape="RoundRectangle 10">
+                        <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                            <!-- Icon -->
+                            <Label Grid.Row="0" Grid.Column="0"
+                                   Grid.RowSpan="2"
+                                   Text="{Binding Icon}"
+                                   FontSize="40"
+                                   VerticalOptions="Start"
+                                   Margin="0,0,15,0" />
+                            
+                            <!-- Name and Type -->
+                            <VerticalStackLayout Grid.Row="0" Grid.Column="1" Spacing="5">
+                                <Label Text="{Binding Name}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="Black" />
+                                <Label Text="{Binding Type}"
+                                       FontSize="12"
+                                       TextColor="#666666" />
+                            </VerticalStackLayout>
+                            
+                            <!-- Address -->
+                            <VerticalStackLayout Grid.Row="1" Grid.Column="1" Spacing="3" Margin="0,10,0,0">
+                                <Label Text="📍"
+                                       FontSize="12"
+                                       TextColor="#666666" />
+                                <Label Text="{Binding Address}"
+                                       FontSize="14"
+                                       TextColor="#666666"
+                                       LineBreakMode="WordWrap" />
+                                <Label Text="{Binding City}"
+                                       FontSize="12"
+                                       TextColor="#999999" />
+                                <Label Text="{Binding Region, StringFormat=', {0}'}"
+                                       FontSize="12"
+                                       TextColor="#999999" />
+                            </VerticalStackLayout>
+                            
+                            <!-- Schedule and Contact -->
+                            <Grid Grid.Row="2" Grid.Column="1"
+                                  ColumnDefinitions="*,*"
+                                  Margin="0,15,0,0">
+                                <VerticalStackLayout Grid.Column="0" Spacing="3">
+                                    <Label Text="🕐"
+                                           FontSize="12"
+                                           TextColor="#666666" />
+                                    <Label Text="{Binding Schedule}"
+                                           FontSize="12"
+                                           TextColor="#666666" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Grid.Column="1" Spacing="3">
+                                    <Label Text="📞"
+                                           FontSize="12"
+                                           TextColor="#666666" />
+                                    <Label Text="{Binding Phone}"
+                                           FontSize="12"
+                                           TextColor="#666666" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Bottom Navigation -->
+        <Grid Grid.Row="4"
+              BackgroundColor="White"
+              Padding="0,10,0,10"
+              RowDefinitions="Auto"
+              ColumnDefinitions="*,*,*,*">
+            <Border Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    Padding="10">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateToHomeCommand}" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Label Text="🏠"
+                           FontSize="24"
+                           HorizontalOptions="Center" />
+                    <Label Text="Accueil"
+                           FontSize="10"
+                           TextColor="#666666"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+            
+            <Border Grid.Column="1"
+                    BackgroundColor="Transparent"
+                    Padding="10">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateToExploreCommand}" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Label Text="🔍"
+                           FontSize="24"
+                           HorizontalOptions="Center" />
+                    <Label Text="Explorer"
+                           FontSize="10"
+                           TextColor="#666666"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+            
+            <Border Grid.Column="2"
+                    BackgroundColor="Transparent"
+                    Padding="10">
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Label Text="📍"
+                           FontSize="24"
+                           HorizontalOptions="Center" />
+                    <Label Text="Bureaux"
+                           FontSize="10"
+                           TextColor="#1A5D4A"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+            
+            <Border Grid.Column="3"
+                    BackgroundColor="Transparent"
+                    Padding="10">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateToAboutCommand}" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Label Text="ℹ️"
+                           FontSize="24"
+                           HorizontalOptions="Center" />
+                    <Label Text="A Propos"
+                           FontSize="10"
+                           TextColor="#666666"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+    </Grid>
+</ContentPage>
+

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:TP.ViewModels"
+             xmlns:models="clr-namespace:TP.Models"
+             x:Class="TP.Views.ExplorePage"
+             x:DataType="viewmodels:ExploreViewModel"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#FAFAFA">
+    
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
+        <!-- Header -->
+        <Grid Grid.Row="0"
+              BackgroundColor="#1A5D4A"
+              Padding="20,60,20,20">
+            <Label Text="Explorer les Procédures"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+        </Grid>
+
+        <!-- Search Bar -->
+        <Border Grid.Row="1"
+                BackgroundColor="White"
+                StrokeThickness="1"
+                Stroke="#E0E0E0"
+                Padding="15,10"
+                Margin="20,15,20,10"
+                StrokeShape="RoundRectangle 25">
+            <Grid ColumnDefinitions="Auto,*">
+                <Label Grid.Column="0"
+                       Text="🔍"
+                       FontSize="20"
+                       VerticalOptions="Center"
+                       Margin="0,0,10,0" />
+                <Entry Grid.Column="1"
+                       Text="{Binding SearchText}"
+                       Placeholder="Rechercher une procédure..."
+                       BackgroundColor="Transparent"
+                       PlaceholderColor="#999999"
+                       TextColor="Black" />
+            </Grid>
+        </Border>
+
+        <!-- Category Filters -->
+        <ScrollView Grid.Row="2"
+                    Orientation="Horizontal"
+                    Margin="20,0,20,10">
+            <CollectionView ItemsSource="{Binding Categories}"
+                          SelectionMode="None"
+                          HeightRequest="50">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Category">
+                        <Border BackgroundColor="White"
+                                StrokeThickness="1"
+                                Stroke="#E0E0E0"
+                                Padding="15,8"
+                                StrokeShape="RoundRectangle 20">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ExploreViewModel}}, Path=NavigateToCategoryCommand}"
+                                                     CommandParameter="{Binding .}" />
+                            </Border.GestureRecognizers>
+                            <Label Text="{Binding Name}"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="Black" />
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+
+        <!-- Procedures List -->
+        <CollectionView Grid.Row="3"
+                        ItemsSource="{Binding FilteredProcedures}"
+                        SelectionMode="None"
+                        Margin="20,0,20,0"
+                        BackgroundColor="#FAFAFA">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Procedure">
+                    <Border BackgroundColor="White"
+                            StrokeThickness="1"
+                            Stroke="#E0E0E0"
+                            Padding="20"
+                            Margin="0,0,0,15"
+                            StrokeShape="RoundRectangle 10">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ExploreViewModel}}, Path=NavigateToProcedureCommand}"
+                                                 CommandParameter="{Binding .}" />
+                        </Border.GestureRecognizers>
+                        
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <!-- Icon -->
+                            <Label Grid.Column="0"
+                                   Text="{Binding Icon}"
+                                   FontSize="40"
+                                   VerticalOptions="Center"
+                                   Margin="0,0,15,0" />
+                            
+                            <!-- Title and Description -->
+                            <VerticalStackLayout Grid.Column="1" Spacing="5">
+                                <Label Text="{Binding Title}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="Black" />
+                                <Label Text="{Binding Description}"
+                                       FontSize="14"
+                                       TextColor="#666666"
+                                       LineBreakMode="TailTruncation" />
+                                <HorizontalStackLayout Spacing="10" Margin="0,5,0,0">
+                                    <Label Text="⏰"
+                                           FontSize="12"
+                                           TextColor="#666666" />
+                                    <Label Text="{Binding Duration}"
+                                           FontSize="12"
+                                           TextColor="#666666" />
+                                    <Label Text="💰"
+                                           FontSize="12"
+                                           TextColor="#666666"
+                                           Margin="10,0,0,0" />
+                                    <Label Text="{Binding Cost}"
+                                           FontSize="12"
+                                           TextColor="#666666" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                            
+                            <!-- Arrow -->
+                            <Label Grid.Column="2"
+                                   Text="›"
+                                   FontSize="24"
+                                   TextColor="#666666"
+                                   VerticalOptions="Center" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Bottom Navigation -->
+        <Grid Grid.Row="4"
+              BackgroundColor="White"
+              Padding="0,10,0,10"
+              RowDefinitions="Auto"
+              ColumnDefinitions="*,*,*,*">
+            <Border Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    Padding="10">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateToHomeCommand}" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Label Text="🏠"
+                           FontSize="24"
+                           HorizontalOptions="Center" />
+                    <Label Text="Accueil"
+                           FontSize="10"
+                           TextColor="#666666"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+            
+            <Border Grid.Column="1"
+                    BackgroundColor="Transparent"
+                    Padding="10">
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Label Text="🔍"
+                           FontSize="24"
+                           HorizontalOptions="Center" />
+                    <Label Text="Explorer"
+                           FontSize="10"
+                           TextColor="#1A5D4A"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+            
+            <Border Grid.Column="2"
+                    BackgroundColor="Transparent"
+                    Padding="10">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateToOfficesCommand}" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Label Text="📍"
+                           FontSize="24"
+                           HorizontalOptions="Center" />
+                    <Label Text="Bureaux"
+                           FontSize="10"
+                           TextColor="#666666"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+            
+            <Border Grid.Column="3"
+                    BackgroundColor="Transparent"
+                    Padding="10">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateToAboutCommand}" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Label Text="ℹ️"
+                           FontSize="24"
+                           HorizontalOptions="Center" />
+                    <Label Text="A Propos"
+                           FontSize="10"
+                           TextColor="#666666"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+    </Grid>
+</ContentPage>
+
