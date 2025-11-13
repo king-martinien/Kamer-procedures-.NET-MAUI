@@ -59,7 +59,7 @@ Cette application a pour objectif de faciliter l'accès aux informations sur les
 ## Captures d'écran
 
 ### Splash Screen
-<img src="docs/screenshots/splashscreen.jpeg" width="400" alt="Splash Screen">
+<img src="docs/screenshots/splashscreen.jpeg" width="300" alt="Splash Screen">
 
 ### Onboarding
 <table>
@@ -71,22 +71,27 @@ Cette application a pour objectif de faciliter l'accès aux informations sur les
 </table>
 
 ### Page d'accueil
-<img src="docs/screenshots/home.jpeg" width="400" alt="Page d'accueil">
+<table>
+<tr>
+<td><img src="docs/screenshots/home.jpeg" width="300" alt="Page d'accueil"></td>
+<td><img src="docs/screenshots/home2.jpeg" width="300" alt="Page d'accueil - Vue 2"></td>
+</tr>
+</table>
 
 ### Détails d'une procédure
-<img src="docs/screenshots/procedure-detail.jpeg" width="400" alt="Détails d'une procédure">
+<img src="docs/screenshots/procedure-detail.jpeg" width="300" alt="Détails d'une procédure">
 
 ### Détails d'une catégorie
-<img src="docs/screenshots/category-detail.jpeg" width="400" alt="Détails d'une catégorie">
+<img src="docs/screenshots/category-detail.jpeg" width="300" alt="Détails d'une catégorie">
 
 ### Exploration des procédures
-<img src="docs/screenshots/discover.jpeg" width="400" alt="Exploration des procédures">
+<img src="docs/screenshots/discover.jpeg" width="300" alt="Exploration des procédures">
 
 ### Bureaux administratifs
-<img src="docs/screenshots/bureaux.jpeg" width="400" alt="Bureaux administratifs">
+<img src="docs/screenshots/bureaux.jpeg" width="300" alt="Bureaux administratifs">
 
 ### À propos
-<img src="docs/screenshots/about.jpeg" width="400" alt="À propos">
+<img src="docs/screenshots/about.jpeg" width="300" alt="À propos">
 
 ## Technologies utilisées
 
