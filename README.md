@@ -59,32 +59,34 @@ Cette application a pour objectif de faciliter l'accès aux informations sur les
 ## Captures d'écran
 
 ### Splash Screen
-![Splash Screen](docs/screenshots/splashscreen.jpeg)
+<img src="docs/screenshots/splashscreen.jpeg" width="400" alt="Splash Screen">
 
 ### Onboarding
-![Onboarding - Écran 1](docs/screenshots/onboarding1.jpeg)
-
-![Onboarding - Écran 2](docs/screenshots/onboarding2.jpeg)
-
-![Onboarding - Écran 3](docs/screenshots/onboarding3.jpeg)
+<table>
+<tr>
+<td><img src="docs/screenshots/onboarding1.jpeg" width="200" alt="Onboarding - Écran 1"></td>
+<td><img src="docs/screenshots/onboarding2.jpeg" width="200" alt="Onboarding - Écran 2"></td>
+<td><img src="docs/screenshots/onboarding3.jpeg" width="200" alt="Onboarding - Écran 3"></td>
+</tr>
+</table>
 
 ### Page d'accueil
-![Page d'accueil](docs/screenshots/home.jpeg)
+<img src="docs/screenshots/home.jpeg" width="400" alt="Page d'accueil">
 
 ### Détails d'une procédure
-![Détails d'une procédure](docs/screenshots/procedure-detail.jpeg)
+<img src="docs/screenshots/procedure-detail.jpeg" width="400" alt="Détails d'une procédure">
 
 ### Détails d'une catégorie
-![Détails d'une catégorie](docs/screenshots/category-detail.jpeg)
+<img src="docs/screenshots/category-detail.jpeg" width="400" alt="Détails d'une catégorie">
 
 ### Exploration des procédures
-![Exploration des procédures](docs/screenshots/discover.jpeg)
+<img src="docs/screenshots/discover.jpeg" width="400" alt="Exploration des procédures">
 
 ### Bureaux administratifs
-![Bureaux administratifs](docs/screenshots/bureaux.jpeg)
+<img src="docs/screenshots/bureaux.jpeg" width="400" alt="Bureaux administratifs">
 
 ### À propos
-![À propos](docs/screenshots/about.jpeg)
+<img src="docs/screenshots/about.jpeg" width="400" alt="À propos">
 
 ## Technologies utilisées
 
